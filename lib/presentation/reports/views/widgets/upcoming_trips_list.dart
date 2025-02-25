@@ -1,11 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:thanima_admin/presentation/reports/views/widgets/upcoming_trip_card.dart';
 
 class UpcomingTripsList extends StatelessWidget {
   const UpcomingTripsList({super.key});
 
+  
+
 
   @override
   Widget build(BuildContext context) {
+    List<Map> upcomingTrips = [
+  {
+    "assetImageName": "assets/images/jaipur.png",
+    "visitorName":"Santosh Chandra",
+    "activityName": "Jaipur City Tours",
+    "visitorNo": "10+ Visitors",
+    "duration": "5 - 10 Feb",
+  },
+  {
+    "assetImageName": "assets/images/beach.png",
+    "visitorName":"Aadarsh Soni",
+    "activityName": "Jungle Safari Gujrat",
+    "visitorNo": "10+ Visitors",
+    "duration": "5 - 10 Feb",
+  },
+  {
+    "assetImageName": "assets/images/beach.png",
+    "visitorName":"Vipul Ranjan",
+    "activityName": "Jaigarh Fort Tour",
+    "visitorNo": "10+ Visitors",
+    "duration": "5 - 10 Feb",
+  },
+  {
+    "assetImageName": "assets/images/beach.png",
+    "visitorName":"Vipul Ranjan",
+    "activityName": "Zipline Activity",
+    "visitorNo": "13+ Visitors",
+    "duration": "1 - 12 Feb",
+  },
+];
     return SizedBox(
       height: 367,
       // width: 311,
@@ -24,36 +57,15 @@ class UpcomingTripsList extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 3,
+              itemCount: 4,
               itemBuilder: (context, index) {
                 // final event = events[index];
-                return Card(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                      color: Colors.green,
-                        width: 60,
-                      height: 54,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Jaipur City Tours",style: TextStyle(fontSize: 10),),
-                        Text("Santosh Chandra",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),),
-                        Text("10+ Visitors",style: TextStyle(fontSize: 10),),
-                      ],
-                    ),
-                        ],
-                      ),
-                    Text("5 - 10 Feb",style: TextStyle(fontSize: 10),)
-                    ],
-                  ),
+                return UpcomingTripCard(
+                  activityName: upcomingTrips[index]["activityName"],
+                  assetImageName: upcomingTrips[index]["assetImageName"],
+                  duration: upcomingTrips[index]["duration"],
+                  visitorName: upcomingTrips[index]["visitorName"],
+                  visitorNo: upcomingTrips[index]["visitorNo"],
                 );
               },
             ),
@@ -63,3 +75,4 @@ class UpcomingTripsList extends StatelessWidget {
     );
   }
 }
+

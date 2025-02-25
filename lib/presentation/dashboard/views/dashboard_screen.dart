@@ -30,6 +30,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               height: 20,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Column(
@@ -43,23 +44,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           scrollDirection: Axis.horizontal,
                           children: [
                             SizedBox(width: 10,),
-                            VisitorsCountCard(),
+                            VisitorsCountCard(icon: Icons.person_add_alt_1_outlined,quantity: "1,200",title: "Total Visitor's",iconColor: Color(0xFF45ACFD),),
                             SizedBox(width: 10,),
-                            VisitorsCountCard(),
+                            VisitorsCountCard(icon: Icons.person_4_sharp,quantity: "10",title: "New Visitor's",iconColor: Color(0xFFFF8812),),
                             SizedBox(width: 10,),
-                            VisitorsCountCard(),
+                            VisitorsCountCard(icon: Icons.login,quantity: "23",title: "Today's Check In",iconColor: Color(0xFF00E03C),),
                             SizedBox(width: 10,),
-                            VisitorsCountCard(),
+                            VisitorsCountCard(icon: Icons.logout_sharp,quantity: "10",title: "Today's Check Out",iconColor: Color(0xFFFF704C),),
                             
                           ],
                         ),
                         ),
                         // Revenue Chart
+                        SizedBox(
+                          height: 20,
+                        ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
                               children: [
                                 RevenueChart(),
+                                SizedBox(
+                                  height: 10,
+                                ),
                                 ReviewsCard(),
                                 OptimalPackageCard(),
                               ],

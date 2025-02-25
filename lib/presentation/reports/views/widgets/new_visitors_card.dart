@@ -7,6 +7,38 @@ class NewVisitorsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> newVisitors = [
+  {
+    "color": Color(0xFFFFBCBC),
+    "name": "Aadarsh Soni",
+    "location": "Raigarh, CG",
+    "days": "1",
+  },
+  {
+    "color": Color(0xFFDCFFBC),
+    "name": "Jai Sharma",
+    "location": "Delhi",
+    "days": "3",
+  },
+  {
+    "color": Color(0xFFBCE4FF),
+    "name": "Dheraj Kapor",
+    "location": "Punjab",
+    "days": "4",
+  },
+  {
+    "color": Color(0xFFFFBCF3),
+    "name": "Manoj Soni",
+    "location": "Patna, Bihar",
+    "days": "4",
+  },
+  {
+    "color": Color(0xFFBCFFCF),
+    "name": "Shrish Soni",
+    "location": "Jaipur, RJ",
+    "days": "3",
+  },
+];
     return Container(
       height: 231,
       width: 214,
@@ -38,37 +70,67 @@ class NewVisitorsCard extends StatelessWidget {
               itemCount: 4,
               itemBuilder: (context, index) {
                 // final event = events[index];
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                      backgroundColor: Colors.green,
-                        radius: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Jaipur City Tours",style: TextStyle(fontSize: 5),),
-                        Text("Santosh Chandra",style: TextStyle(fontSize: 8,fontWeight: FontWeight.w600),),
-                        Text("10+ Visitors",style: TextStyle(fontSize: 5),),
-                      ],
-                    ),
-                    
-                        ],
-                      ),
-                    Text("5 - 10 Feb",style: TextStyle(fontSize: 5),)
-                    ],
-                  ),
+                return NewVisitorInfoCard(
+                  color: newVisitors[index]["color"],
+                  days: newVisitors[index]["days"],
+                  location: newVisitors[index]["location"],
+                  name: newVisitors[index]["name"],
                 );
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+class NewVisitorInfoCard extends StatelessWidget {
+  final Color color;
+  final String name;
+  final String location;
+  final String days;
+
+  const NewVisitorInfoCard({
+    super.key,
+    required this.color,
+    required this.name,
+    required this.location,
+    required this.days,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundColor: color,
+                radius: 18,
+                child: Text(
+                  "T.", // Taking the first letter of the name
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(width: 5),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name, style: TextStyle(fontSize: 12)),
+                  Text(location, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                ],
+              ),
+            ],
+          ),
+          Text("$days Day(s) ago", style: TextStyle(fontSize: 7)),
         ],
       ),
     );
