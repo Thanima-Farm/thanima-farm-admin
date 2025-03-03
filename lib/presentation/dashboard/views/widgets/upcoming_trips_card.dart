@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thanima_admin/presentation/reports/views/widgets/calender_page.dart';
-import 'package:thanima_admin/presentation/reports/views/widgets/upcoming_trips_list.dart';
+import 'package:thanima_admin/presentation/dashboard/views/widgets/calender_page.dart';
+import 'package:thanima_admin/presentation/dashboard/views/widgets/upcoming_trips_list.dart';
 
 class UpcomingTripsCard extends StatelessWidget {
   const UpcomingTripsCard({

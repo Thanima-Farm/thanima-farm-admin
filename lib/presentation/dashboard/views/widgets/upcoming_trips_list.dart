@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thanima_admin/presentation/reports/views/widgets/upcoming_trip_card.dart';
+import 'package:thanima_admin/presentation/dashboard/views/widgets/upcoming_trip_card.dart';
 
 class UpcomingTripsList extends StatelessWidget {
   const UpcomingTripsList({super.key});

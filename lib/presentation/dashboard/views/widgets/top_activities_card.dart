@@ -31,16 +31,18 @@ class TopActivitiesCard extends StatelessWidget {
                   SizedBox(
                     height: 18,
                     width: 86,
-                    child: Text("Top Activities", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold))
+                    child: Text("Top Activities", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold))
                     ),
                   SizedBox(
                     height: 24,
                     width: 77,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Feb 2025", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)
+                        Text("Feb 2025", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)
                         ),
-                        Icon(Icons.keyboard_arrow_down,color: Color(0xFF0038FF),)
+                        Icon(Icons.keyboard_arrow_down,color: Color(0xFF0038FF),size: 16,)
                       ],
                     ),
                     ),
