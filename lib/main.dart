@@ -1,4 +1,5 @@
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thanima_admin/presentation/dashboard/viewmodels/menu_app_controller.dart';
@@ -6,7 +7,11 @@ import 'package:thanima_admin/presentation/login_screen.dart';
 import 'package:thanima_admin/presentation/main_screen.dart';
 import 'package:thanima_admin/theme/theme.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(apiKey: "AIzaSyA1Kxo0tbcjGuFFlCnFxmiB1yCxKl8mTuY", appId: "1:27975663970:web:15a2996aa15eea90f4ac3b", messagingSenderId: "27975663970", projectId: "thanima-life")
+  );
   runApp(MyApp());
 }
 
