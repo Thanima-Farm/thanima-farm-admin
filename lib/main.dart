@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
             create: (context) => MenuAppController(),
           ),
         ],
-        child: MainScreen(),
-        // child: LoginScreen(),
+        // child: MainScreen(),
+        child: LoginScreen(),
       ),
     );
   }

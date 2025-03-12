@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:thanima_admin/presentation/dashboard/views/dashboard_screen.dart';
+import 'package:thanima_admin/presentation/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,6 +11,33 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _errorMessage = "";
+  
+  Future<void> _login() async {
+  try {
+    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      email: _usernameController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+
+    if (userCredential.user != null) {
+      if (!mounted) return; // Prevents errors if widget is disposed
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainScreen()),
+      );
+    }
+  } on FirebaseAuthException catch (e) {
+    setState(() {
+      _errorMessage = e.message ?? "Login failed";
+    });
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -65,6 +95,7 @@ borderRadius: BorderRadius.all(Radius.circular(5.0)),
           height: 15,
         ),
         TextField(
+          controller: _usernameController,
           decoration: InputDecoration(
             hintStyle: TextStyle(fontSize: 11),
             prefixIcon: Icon(Icons.notes_outlined,color: Color(0xFFB7B7B7)),
@@ -76,6 +107,7 @@ borderRadius: BorderRadius.all(Radius.circular(5.0)),
           height: 10,
         ),
         TextField(
+          controller: _passwordController,
           decoration: InputDecoration(
             hintStyle: TextStyle(fontSize: 11),
             prefixIcon: Icon(Icons.lock,color: Color(0xFFB7B7B7)),
@@ -96,7 +128,8 @@ borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       borderRadius: BorderRadius.circular(4),
                     ),
                                   ),
-            onPressed: (){}, child: Text("Login",style: TextStyle(fontSize: 12),),
+            onPressed: _login,
+             child: Text("Login",style: TextStyle(fontSize: 12),),
             ),
         )
       ],
