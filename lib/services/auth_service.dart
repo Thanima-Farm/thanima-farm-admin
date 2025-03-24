@@ -17,8 +17,6 @@ class AuthService {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Connection": "kepp-alive",
       },
       body: jsonEncode({"email": email, "password": password}),
     );
