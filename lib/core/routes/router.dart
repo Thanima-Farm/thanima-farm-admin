@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:thanima_admin/features/auth/ui/pages/auth_page.dart';
-import 'package:thanima_admin/features/auth/ui/pages/login_page.dart';
-import 'package:thanima_admin/features/home/ui/pages/home_page.dart';
-import 'package:thanima_admin/features/home/ui/widgets/search_page.dart';
+import 'package:thanima_admin/views/auth/login_screen.dart';
+import 'package:thanima_admin/views/layout/home_page.dart';
+import 'package:thanima_admin/views/reports/reports_screen.dart';
+import 'package:thanima_admin/views/users/users_screen.dart';
 
 class Routes {
   static const homePageRoute = "/home_page_route";
@@ -18,20 +18,30 @@ class Routes {
       case homePageRoute:
         // String? args = settings.arguments as String?;
         return MaterialPageRoute(
-            settings: settings, builder: (context) => const HomePage());
+          settings: settings,
+          builder: (context) => const HomePage(),
+        );
       case searchScreenRoute:
         return MaterialPageRoute(
-            settings: settings, builder: (context) => const SearchPage());
+          settings: settings,
+          builder: (context) => const ReportsScreen(),
+        );
       case authScreenRoute:
         return MaterialPageRoute(
-            settings: settings, builder: (context) => const AuthScreen());
+          settings: settings,
+          builder: (context) => const UsersScreen(),
+        );
       case loginScreenRoute:
         return MaterialPageRoute(
-            settings: settings, builder: (context) => const LoginPage());
+          settings: settings,
+          builder: (context) => const LoginScreen(),
+        );
 
       default:
         return MaterialPageRoute(
-            settings: settings, builder: (context) => const HomePage());
+          settings: settings,
+          builder: (context) => const HomePage(),
+        );
     }
   }
 }

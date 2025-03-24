@@ -13,12 +13,11 @@ import 'router.dart';
 // / whenever the user navigates away from the current page route to another page route.
 
 class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
-  static final MyRouteObserver _myRouteObserver =
-      MyRouteObserver._internal(enableLogger: true);
+  static final MyRouteObserver _myRouteObserver = MyRouteObserver._internal(
+    enableLogger: true,
+  );
 
-  MyRouteObserver._internal({
-    this.enableLogger = true,
-  }) : _stack = [];
+  MyRouteObserver._internal({this.enableLogger = true}) : _stack = [];
 
   factory MyRouteObserver() {
     return _myRouteObserver;
