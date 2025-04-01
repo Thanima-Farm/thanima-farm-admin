@@ -4,20 +4,21 @@ import 'package:flutter/material.dart';
 
 import 'router.dart';
 
-// / TODO check this file
-// / [RouteObserver] informs subscribers whenever a route is
-// / pushed on top of their own route or popped from it.
-// /
-// / This is for example useful to keep track of page transitions,
-// / e.g. a RouteObserver<PageRoute> will inform subscribed MyRouteObserver
-// / whenever the user navigates away from the current page route to another page route.
+/// TODO check this file
+/// [RouteObserver] informs subscribers whenever a route is
+/// pushed on top of their own route or popped from it.
+///
+/// This is for example useful to keep track of page transitions,
+/// e.g. a RouteObserver<PageRoute> will inform subscribed MyRouteObserver
+/// whenever the user navigates away from the current page route to another page route.
 
 class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
-  static final MyRouteObserver _myRouteObserver = MyRouteObserver._internal(
-    enableLogger: true,
-  );
+  static final MyRouteObserver _myRouteObserver =
+      MyRouteObserver._internal(enableLogger: true);
 
-  MyRouteObserver._internal({this.enableLogger = true}) : _stack = [];
+  MyRouteObserver._internal({
+    this.enableLogger = true,
+  }) : _stack = [];
 
   factory MyRouteObserver() {
     return _myRouteObserver;

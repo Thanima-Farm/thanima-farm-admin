@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:thanima_admin/views/auth/login_screen.dart';
-import 'package:thanima_admin/views/layout/home_page.dart';
-import 'package:thanima_admin/views/reports/reports_screen.dart';
-import 'package:thanima_admin/views/users/users_screen.dart';
+import 'package:thanima_admin/features/auth/ui/auth_page.dart';
+import 'package:thanima_admin/features/auth/ui/login_screen.dart';
+import 'package:thanima_admin/features/dashboard/search_page.dart';
+import 'package:thanima_admin/features/layout/home_page.dart';
 
 class Routes {
   static const homePageRoute = "/home_page_route";
@@ -16,7 +16,7 @@ class Routes {
     // }
     switch (settings.name) {
       case homePageRoute:
-        // String? args = settings.arguments as String?;
+        String? args = settings.arguments as String?;
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => const HomePage(),
@@ -24,12 +24,12 @@ class Routes {
       case searchScreenRoute:
         return MaterialPageRoute(
           settings: settings,
-          builder: (context) => const ReportsScreen(),
+          builder: (context) => const SearchPage(),
         );
       case authScreenRoute:
         return MaterialPageRoute(
           settings: settings,
-          builder: (context) => const UsersScreen(),
+          builder: (context) => const AuthScreen(),
         );
       case loginScreenRoute:
         return MaterialPageRoute(
