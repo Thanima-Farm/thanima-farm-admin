@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thanima_admin/core/routes/router.dart';
 import 'package:thanima_admin/core/services/api_client.dart';
 import 'package:thanima_admin/features/auth/cubit/login/login_cubit.dart';
 import 'package:thanima_admin/features/auth/cubit/login/login_state.dart';
@@ -119,14 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       >(
                                         listener: (context, state) {
                                           if (state is LoginSuccess) {
-                                            ScaffoldMessenger.of(
+                                            Navigator.pushNamedAndRemoveUntil(
                                               context,
-                                            ).showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                  "Login Successful!",
-                                                ),
-                                              ),
+                                              Routes.homePageRoute,
+                                              (route) => false,
                                             );
                                             // Navigate to the Dashboard or another screen
                                           } else if (state is LoginFailure) {

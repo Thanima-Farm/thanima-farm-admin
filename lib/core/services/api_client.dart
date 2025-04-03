@@ -42,49 +42,38 @@ class ApiClient {
     return ApiClient._(dio);
   }
 
-  Future<NetworkResponse?> request<T>({
+  Future<Response<T>> request<T>({
     required String url,
     required RequestType requestType,
     Map<String, dynamic>? queryParameters,
     dynamic body,
     ResponseType responseType = ResponseType.json,
   }) async {
-    try {
-      final options = Options(responseType: responseType);
-      Response response;
+    final options = Options(responseType: responseType);
+    Response<T> response;
 
-      switch (requestType) {
-        case RequestType.GET:
-          response = await dio.get<T>(
-            url,
-            queryParameters: queryParameters,
-            options: options,
-          );
-          break;
-        case RequestType.POST:
-          response = await dio.post<T>(url, data: body, options: options);
-          break;
-        case RequestType.PUT:
-          response = await dio.put<T>(url, data: body, options: options);
-          break;
-        case RequestType.PATCH:
-          response = await dio.patch<T>(url, data: body, options: options);
-          break;
-        case RequestType.DELETE:
-          response = await dio.delete<T>(url, data: body, options: options);
-          break;
-      }
-      if (response.data != null) {
-        return NetworkResponse.success(response.data!);
-      } else {
-        return NetworkResponse.error("No data received from the API");
-      }
-    } catch (error) {
-      if (error is DioException) {
-        return NetworkResponse.error(error.response?.data ?? error.message);
-      }
-      return NetworkResponse.error(error.toString());
+    switch (requestType) {
+      case RequestType.GET:
+        response = await dio.get<T>(
+          url,
+          queryParameters: queryParameters,
+          options: options,
+        );
+        break;
+      case RequestType.POST:
+        response = await dio.post<T>(url, data: body, options: options);
+        break;
+      case RequestType.PUT:
+        response = await dio.put<T>(url, data: body, options: options);
+        break;
+      case RequestType.PATCH:
+        response = await dio.patch<T>(url, data: body, options: options);
+        break;
+      case RequestType.DELETE:
+        response = await dio.delete<T>(url, data: body, options: options);
+        break;
     }
+    return response;
   }
 }
 // lib/
