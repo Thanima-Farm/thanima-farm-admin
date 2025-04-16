@@ -7,7 +7,7 @@ import 'package:thanima_admin/core/service_locator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thanima_admin/my_app.dart';
 
 Future<void> applySystemSettings() async {
@@ -28,8 +28,8 @@ void main() {
 
       await setupServiceLocator();
       final AppConfig appConfig = locator.get<AppConfig>();
-      final SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
+      // final SharedPreferences sharedPreferences =
+      //     await SharedPreferences.getInstance();
 
       const String strEnv = String.fromEnvironment("env", defaultValue: "qa");
       final Environment env = Environment.from(strEnv);

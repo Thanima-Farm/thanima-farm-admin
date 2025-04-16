@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'interceptor/error_interceptor.dart';
 import 'interceptor/logging_interceptor.dart';
 import 'interceptor/retry_interceptor.dart';
-import 'network_response/network_response.dart';
+// import 'network_response/network_response.dart';
 
 enum RequestType { GET, POST, PUT, PATCH, DELETE }
 

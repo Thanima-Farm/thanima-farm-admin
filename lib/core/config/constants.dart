@@ -1,4 +1,4 @@
 class Constants {
   static const String baseURL =
-      "https://mnoihkamhd.execute-api.us-east-1.amazonaws.com";
+      "https://gau9gqbxih.execute-api.us-east-1.amazonaws.com";
 }

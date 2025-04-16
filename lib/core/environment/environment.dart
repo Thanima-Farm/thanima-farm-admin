@@ -24,8 +24,8 @@ extension Properties on Environment {
       case Environment.dev:
       case Environment.beta:
       case Environment.prod:
-      default:
-        return "https://192.168.1.1:4000/api"; // TODO: add your server api url here
+        // default:
+        return "https://192.168.1.1:4000/api"; // TODO : add your server api url here
     }
   }
 }

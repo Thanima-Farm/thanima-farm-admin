@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thanima_admin/core/services/api_client.dart';
 import 'package:thanima_admin/features/dashboard/dashboard_screen.dart';
 import 'package:thanima_admin/features/reports/reports_screen.dart';
+import 'package:thanima_admin/features/users/cubit/users_cubit.dart';
 import 'package:thanima_admin/features/users/users_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,10 +16,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  static late final ApiClient apiClient; // init this somewhere
 
-  static const List<Widget> _pages = [
+  @override
+  void initState() {
+    apiClient = ApiClient(
+      baseUrl: 'https://gau9gqbxih.execute-api.us-east-1.amazonaws.com',
+    ); // or pass from higher up
+    super.initState();
+  }
+
+  static final List<Widget> _pages = [
     DashboardScreen(),
-    UsersScreen(),
+    BlocProvider(create: (_) => UsersCubit(apiClient), child: UsersScreen()),
     ReportsScreen(),
   ];
 

@@ -16,7 +16,7 @@ class Routes {
     // }
     switch (settings.name) {
       case homePageRoute:
-        String? args = settings.arguments as String?;
+        // String? args = settings.arguments as String?;
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => const HomePage(),

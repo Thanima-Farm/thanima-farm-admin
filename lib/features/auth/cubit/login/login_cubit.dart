@@ -28,32 +28,5 @@ class LoginCubit extends Cubit<LoginState> {
       print("Response is null");
       emit(LoginFailure("Invalid email or password"));
     }
-
-    // if (response != null) {
-    //   print("Login successful: ${response}");
-    // } else {
-    //   print("Login failed: ${response}");
-    // }
-    // Future.delayed(Duration(seconds: 2), () {
-    //   if (email == "test@example.com" && password == "password") {
-    //     emit(LoginSuccess());
-    //   } else {
-    //     emit(LoginFailure("Invalid email or password"));
-    //   }
-    // });
   }
 }
-// Future<void> login(String email, String password) async {
-//     final response = await apiClient.request(
-//       url: "/auth/login", // Your API login endpoint
-//       requestType: RequestType.POST,
-//       body: {"email": email, "password": password},
-//     );
-
-//     if (response != null) {
-//       print("Login successful: ");
-//       // Navigate to home screen or save token
-//     } else {
-//       print("Login failed: ${response}");
-//     }
-//   }
