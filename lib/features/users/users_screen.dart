@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanima_admin/features/layout/header.dart';
+import 'package:thanima_admin/features/users/create_user.dart';
 import 'package:thanima_admin/features/users/cubit/users_cubit.dart';
 import 'package:thanima_admin/features/users/cubit/users_state.dart';
+import 'package:thanima_admin/features/users/edit_user.dart';
 import 'package:thanima_admin/features/users/user_model.dart';
 
 class UsersScreen extends StatefulWidget {
@@ -69,19 +71,6 @@ class _UsersScreenState extends State<UsersScreen> {
                       ElevatedButton(
                         onPressed: () {
                           showCreateUserDialog(context);
-                          // final newUser = {
-                          //   "name": "Rahul",
-                          //   "email": "rahul@gmail.com",
-                          //   "mobile": "+911299453212",
-                          //   "username": "rwt",
-                          //   "password": "Guides",
-                          //   "role": "Guides",
-                          // };
-
-                          // // Print or use Bloc to send this to API
-                          // debugPrint("Create user: $newUser");
-                          // context.read<UsersCubit>().createUser(newUser);
-                          // // Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
@@ -131,65 +120,15 @@ class _UsersScreenState extends State<UsersScreen> {
     );
   }
 
-  void showCreateUserDialog(BuildContext outerContext) {
-    // all controllers ...
-    final nameController = TextEditingController();
-    final emailController = TextEditingController();
-    final contactController = TextEditingController();
-    final usernameController = TextEditingController();
-    final passwordController = TextEditingController();
-    final roleController = TextEditingController();
-    String status = 'Active';
-
+  void showCreateUserDialog(BuildContext context) {
     showDialog(
-      context: outerContext,
-      builder: (dialogContext) {
-        return AlertDialog(
-          title: const Text("Add User"),
-          content: SingleChildScrollView(
-            child: SizedBox(
-              height: 682.h,
-              width: 431.w,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _buildTextField(nameController, "Name"),
-                  _buildTextField(contactController, "Contact"),
-                  _buildTextField(emailController, "Mail Id"),
-                  _buildTextField(roleController, "Role"),
-                  _buildTextField(usernameController, "Username"),
-                  _buildTextField(passwordController, "Password"),
-                ],
-              ),
-            ),
+      context: context,
+      builder:
+          (dialogContext) => CreateUserDialog(
+            onSubmit: (newUser) {
+              context.read<UsersCubit>().createUser(newUser);
+            },
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text("Cancel"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                final newUser = {
-                  "name": nameController.text,
-                  "email": emailController.text,
-                  "mobile": contactController.text,
-                  "username": usernameController.text,
-                  "password": passwordController.text,
-                  "role": roleController.text,
-                };
-
-                debugPrint("Create user: $newUser");
-
-                // ✅ Use the outerContext that has UsersCubit
-                outerContext.read<UsersCubit>().createUser(newUser);
-                Navigator.of(dialogContext).pop();
-              },
-              child: const Text("Add", style: TextStyle(color: Colors.white)),
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -273,7 +212,7 @@ class _UsersScreenState extends State<UsersScreen> {
                   DataCell(Text(user.username)),
                   DataCell(Text(user.password)),
                   DataCell(StatusBadge(status: user.status)),
-                  const DataCell(ActionButtons()),
+                  DataCell(ActionButtons(user: user)),
                 ],
               );
             }).toList(),
@@ -316,16 +255,41 @@ class StatusBadge extends StatelessWidget {
 }
 
 class ActionButtons extends StatelessWidget {
-  const ActionButtons({super.key});
+  final UserModel user;
+
+  const ActionButtons({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
-        Icon(Icons.delete_outline_outlined),
-        SizedBox(width: 5),
-        Icon(Icons.edit_outlined),
+      children: [
+        IconButton(
+          onPressed: () {
+            context.read<UsersCubit>().deleteUser(user.id.toString());
+          },
+          icon: const Icon(Icons.delete_outline_outlined),
+        ),
+        const SizedBox(width: 5),
+        IconButton(
+          onPressed: () {
+            showEditUserDialog(context, user);
+          },
+          icon: const Icon(Icons.edit_outlined),
+        ),
       ],
+    );
+  }
+
+  void showEditUserDialog(BuildContext context, UserModel user) {
+    showDialog(
+      context: context,
+      builder:
+          (_) => EditUserDialog(
+            user: user, // Pass the user to prefill the form
+            onSubmit: (updatedUser) {
+              // context.read<UsersCubit>().editUser(updatedUser);
+            },
+          ),
     );
   }
 }

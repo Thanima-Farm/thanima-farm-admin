@@ -50,36 +50,42 @@ class VisitorsCountCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(title,
-                        style: TextStyle(fontSize: 10.sp, color: Colors.grey)),
-                    Text(quantity,
-                        style: TextStyle(
-                            fontSize: 14.sp, fontWeight: FontWeight.w600)),
+                    Text(
+                      title,
+                      style: TextStyle(fontSize: 10.sp, color: Colors.grey),
+                    ),
+                    Text(
+                      quantity,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        Positioned(
-          bottom: 2.h,
-          right: 2.w,
-          child: Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Container(
-              width: 46.w,
-              height: 16.h,
-              padding: EdgeInsets.symmetric(vertical: 1, horizontal: 2),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                border: Border.all(color: Color(0xFFB4B4B4)),
-              ),
-              child: Center(
-                  child: Text("+2.98%", style: TextStyle(fontSize: 10.sp))),
-            ),
-          ),
-        ),
+        // Positioned(
+        //   bottom: 2.h,
+        //   right: 2.w,
+        //   child: Padding(
+        //     padding: const EdgeInsets.all(2.0),
+        //     child: Container(
+        //       width: 46.w,
+        //       height: 16.h,
+        //       padding: EdgeInsets.symmetric(vertical: 1, horizontal: 2),
+        //       decoration: BoxDecoration(
+        //         color: Color(0xFFFFFFFF),
+        //         borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        //         border: Border.all(color: Color(0xFFB4B4B4)),
+        //       ),
+        //       child: Center(
+        //           child: Text("+2.98%", style: TextStyle(fontSize: 10.sp))),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

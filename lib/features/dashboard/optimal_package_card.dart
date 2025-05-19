@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thanima_admin/features/dashboard/cubit/admin_dashboard_model.dart';
 
 class OptimalPackageCard extends StatelessWidget {
-  const OptimalPackageCard({super.key});
+  final List<MostSoldPackage> packageList;
+  const OptimalPackageCard({super.key, required this.packageList});
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +45,10 @@ class OptimalPackageCard extends StatelessWidget {
                 Text(
                   "Optimal Package Sold",
                   style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF6A6A6A)),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF6A6A6A),
+                  ),
                 ),
                 Row(
                   children: [
@@ -53,24 +56,7 @@ class OptimalPackageCard extends StatelessWidget {
                       "Sort by",
                       style: TextStyle(fontSize: 8, color: Color(0xFF1E1E1E)),
                     ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          border: Border.all(color: Color(0xFFB4B4B4)),
-                        ),
-                        child: Text(
-                          "Latest",
-                          style: TextStyle(
-                              fontSize: 10, fontWeight: FontWeight.w600),
-                        )),
-                    SizedBox(
-                      width: 5.w,
-                    ),
+                    SizedBox(width: 5.w),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                       decoration: BoxDecoration(
@@ -78,30 +64,43 @@ class OptimalPackageCard extends StatelessWidget {
                         border: Border.all(color: Color(0xFFB4B4B4)),
                       ),
                       child: Text(
-                        "View All",
-                        style: TextStyle(fontSize: 10),
+                        "Latest",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 5.w),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        border: Border.all(color: Color(0xFFB4B4B4)),
+                      ),
+                      child: Text("View All", style: TextStyle(fontSize: 10)),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
           Expanded(
             child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (contex, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: PackageCard(
-                      gradient: packageData[index]["gradient"],
-                      packageName: packageData[index]["packageName"],
-                      price: packageData[index]["price"],
-                    ),
-                  );
-                }),
-          )
+              scrollDirection: Axis.horizontal,
+              itemCount: 3,
+              itemBuilder: (contex, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: PackageCard(
+                    gradient: packageData[index]["gradient"],
+                    packageName: packageList[index].packageName,
+                    price: packageList[index].soldCount,
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thanima_admin/features/dashboard/cubit/admin_dashboard_model.dart';
 
 class ReviewsCard extends StatelessWidget {
-  const ReviewsCard({super.key});
+  final Reviews reviews;
+
+  const ReviewsCard({super.key, required this.reviews});
 
   @override
   Widget build(BuildContext context) {
+    final totalReviews = reviews.total;
+    final breakdown = reviews.breakdown;
+
     return Container(
       height: 78.h,
       width: 468.w,
@@ -32,13 +38,16 @@ class ReviewsCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Reviews',
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  '300',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  totalReviews.toString(),
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -52,20 +61,20 @@ class ReviewsCard extends StatelessWidget {
                   Container(
                     height: 16.h,
                     width: 80.w,
-                    // padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade100,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           'This Week',
                           style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 8),
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 8,
+                          ),
                         ),
                         Icon(
                           Icons.arrow_drop_down,
@@ -76,21 +85,24 @@ class ReviewsCard extends StatelessWidget {
                     ),
                   ),
                   LinearProgressIndicator(
-                    value: 0.85,
+                    value:
+                        (totalReviews / reviews.breakdown.length)
+                            .clamp(0, 1)
+                            .toDouble(), // Example normalization
                     backgroundColor: Colors.orange.shade100,
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
                     minHeight: 8,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  // const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildReviewLabel(
-                          Colors.orange.shade200, 'Excellent(4.0)'),
-                      _buildReviewLabel(Colors.orange.shade400, 'Good(3.5)'),
-                      _buildReviewLabel(Colors.orange.shade600, 'Better(2.5)'),
-                    ],
+                    children:
+                        breakdown.map((item) {
+                          return _buildReviewLabel(
+                            _getColorForRating(item.count as double),
+                            '${item.ratingType}(${item.ratingType})',
+                          );
+                        }).toList(),
                   ),
                 ],
               ),
@@ -107,15 +119,20 @@ class ReviewsCard extends StatelessWidget {
         Container(
           width: 12.w,
           height: 12.h,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         SizedBox(width: 8.w),
-        Text(label,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 10)),
+        Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 10),
+        ),
       ],
     );
+  }
+
+  Color _getColorForRating(double rating) {
+    if (rating >= 4.0) return Colors.orange.shade200;
+    if (rating >= 3.5) return Colors.orange.shade400;
+    return Colors.orange.shade600;
   }
 }

@@ -31,4 +31,17 @@ class UserModel {
       status: json['status'] == "true" ? "Active" : "Disable",
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'mobile': mobile,
+      'username': username,
+      'password': password,
+      'role': role,
+      'status': status == "Active" ? "true" : "false",
+    };
+  }
 }

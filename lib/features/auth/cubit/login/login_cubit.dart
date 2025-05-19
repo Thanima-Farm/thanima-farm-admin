@@ -21,6 +21,8 @@ class LoginCubit extends Cubit<LoginState> {
     if (response.statusCode == 200) {
       var data = jsonEncode(response.data); // Convert response to JSON string
       var decodedData = jsonDecode(data); // Convert JSON string back to Map
+      print("Error Message: ${decodedData["token"]}");
+      TokenStorageService().saveToken(decodedData["token"]);
       print("Error Message: ${decodedData}");
       emit(LoginSuccess());
       TokenStorageService().saveToken(decodedData["token"]);
