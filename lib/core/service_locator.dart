@@ -38,3 +38,4 @@ Future<void> setupServiceLocator() async {
 
   locator.registerSingleton<ApiClient>(ApiClient(baseUrl: Constants.baseURL));
 }
+
