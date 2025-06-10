@@ -3,7 +3,7 @@ name: Deploy Flutter Web to GitHub Pages (Private Repo)
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - development  # Trigger on pushes to the main branch
 
 permissions:
   contents: read
